@@ -8,4 +8,9 @@ form:
 reconnect: Please reconnect to server again
 
 useMetric: true
+
 checkUpdates: true
+version:
+  new: pls download new plugin version https://github.com/Mirik9724/CustomNamesForGeyserMC/releases
+  noFound: You use a latest version
+  er: Wr cann`t check of updates

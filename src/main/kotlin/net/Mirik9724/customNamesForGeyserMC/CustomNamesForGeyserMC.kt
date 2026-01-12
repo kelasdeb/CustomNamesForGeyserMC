@@ -11,6 +11,7 @@ import com.velocitypowered.api.proxy.Player
 import com.velocitypowered.api.proxy.ProxyServer
 import com.velocitypowered.api.scheduler.ScheduledTask
 import com.velocitypowered.api.util.GameProfile
+import net.Mirik9724.customNamesForGeyserMC.BuildConstants.VERSION
 import net.elytrium.limboapi.api.Limbo
 import net.elytrium.limboapi.api.LimboFactory
 import net.elytrium.limboapi.api.chunk.Dimension
@@ -25,9 +26,11 @@ import org.geysermc.geyser.api.GeyserApi
 import org.slf4j.Logger
 import org.yaml.snakeyaml.Yaml
 import java.io.File
+import java.net.URL
 import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.function.Consumer
+import kotlin.math.log
 
 
 @Plugin(
@@ -86,8 +89,14 @@ class CustomNamesForGeyserMC @Inject constructor(
             0f, 0f
         )
 
-        val block = factory.createSimpleBlock("minecraft:barrier")
-        nickWorld?.setBlock(0, 63, 0, block)
+        val emptyBlock = factory.createSimpleBlock("minecraft:barrier")
+
+        nickWorld?.setBlock(0, 63, 0, emptyBlock)
+        nickWorld?.setBlock(0, 66, 0, emptyBlock)
+        nickWorld?.setBlock(0, 64, 1, emptyBlock)
+        nickWorld?.setBlock(1, 64, 0, emptyBlock)
+        nickWorld?.setBlock(-1, 64, 0, emptyBlock)
+        nickWorld?.setBlock(0, 64, -1, emptyBlock)
 
         nwFactory = factory.createLimbo(nickWorld).setName("nickWorld").setGameMode(GameMode.ADVENTURE)
     }
@@ -136,12 +145,30 @@ class CustomNamesForGeyserMC @Inject constructor(
         }
 
         if(data.getByPath("checkUpdates") == "true") {
+            val url = "https://raw.githubusercontent.com/Mirik9724/CustomNamesForGeyserMC/refs/heads/master/VERSION"
+            val version: String = try {
+                URL(url).readText().trim() // читаем весь файл и убираем пробелы/переводы строк
+            } catch (e: Exception) {
+                "unknown"
+            }
+
+            if(VERSION != version){
+                logger.info(data.getByPath("version.new"))
+            }
+            else{
+                logger.info(data.getByPath("version.noFound"))
+            }
+            if(version == "unknown"){
+                logger.warn(data.getByPath("version.er"))
+            }
+            logger.info("Version: " + version)
+        }
 
 
         logger.info(data.getByPath("form.example"))
         logger.info("ON")
 
-    }}
+    }
 
     @Subscribe
     fun onPlayerConnect(event: ServerConnectedEvent) {

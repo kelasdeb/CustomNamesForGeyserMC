@@ -5,13 +5,12 @@ plugins {
     kotlin("jvm") version "2.0.20-Beta1"
     kotlin("kapt") version "2.0.20-Beta1"
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("eclipse")
     id("org.jetbrains.gradle.plugin.idea-ext") version "1.1.8"
     id("xyz.jpenilla.run-velocity") version "2.3.1"
 }
 
 group = "net.Mirik9724"
-version = "0.0.1"
+version = "1.0"
 
 repositories {
     mavenCentral()
@@ -66,7 +65,7 @@ val generateTemplates = tasks.register<Copy>("generateTemplates") {
 sourceSets.main.configure { java.srcDir(generateTemplates.map { it.outputs }) }
 
 project.idea.project.settings.taskTriggers.afterSync(generateTemplates)
-project.eclipse.synchronizationTasks(generateTemplates)
+//project.eclipse.synchronizationTasks(generateTemplates)
 
 tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
     configurations = listOf(project.configurations.runtimeClasspath.get())
