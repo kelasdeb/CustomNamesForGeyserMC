@@ -12,6 +12,12 @@ import com.velocitypowered.api.plugin.Plugin
 import com.velocitypowered.api.proxy.ProxyServer
 import com.velocitypowered.api.scheduler.ScheduledTask
 import com.velocitypowered.api.util.GameProfile
+import net.Mirik9724.api.bstats.charts.SingleLineChart
+import net.Mirik9724.api.bstats.velocity.Metrics
+import net.Mirik9724.api.copyFileFromJar
+import net.Mirik9724.api.loadYmlFile
+import net.Mirik9724.api.tryCreatePath
+import net.Mirik9724.api.updateYmlFromJar
 import net.Mirik9724.customNamesForGeyserMC.BuildConstants.VERSION
 import net.elytrium.limboapi.api.Limbo
 import net.elytrium.limboapi.api.LimboFactory
@@ -20,8 +26,6 @@ import net.elytrium.limboapi.api.chunk.Dimension
 import net.elytrium.limboapi.api.chunk.VirtualWorld
 import net.elytrium.limboapi.api.player.GameMode
 import net.kyori.adventure.text.Component
-import org.bstats.charts.SingleLineChart
-import org.bstats.velocity.Metrics
 import org.geysermc.cumulus.form.CustomForm
 import org.geysermc.geyser.api.GeyserApi
 import org.slf4j.Logger
@@ -36,11 +40,12 @@ import java.util.function.Consumer
 @Plugin(
     id = "customnamesforgeysermc",
     name = "CustomNamesForGeyserMC",
-    version = "1.1",
+    version = VERSION,
     authors = ["Mirik9724"],
     dependencies = [
         Dependency(id = "geyser"),
-        Dependency(id = "limboapi")
+        Dependency(id = "limboapi"),
+        Dependency(id = "mirikapi")
     ]
 )
 class CustomNamesForGeyserMC @Inject constructor(
@@ -48,7 +53,10 @@ class CustomNamesForGeyserMC @Inject constructor(
     private val logger: Logger,
     private val metricsFactory: Metrics.Factory
 ) {
-    lateinit var data: Map<String, Any>
+    val pth = "plugins/CustomNamesForGeyserMC/"
+    val conf = "config.yml"
+
+    lateinit var data: Map<String, String>
     lateinit var factory: LimboFactory
     lateinit var nwFactory: Limbo
         private set
@@ -68,15 +76,6 @@ class CustomNamesForGeyserMC @Inject constructor(
 
     private fun genUUID(nick: String): UUID {
         return UUID.nameUUIDFromBytes("OfflinePlayer:$nick".toByteArray())
-    }
-
-    private fun Map<*, *>.getByPath(path: String): String {
-        val keys = path.split(".")
-        var current: Any? = this
-        for (key in keys) {
-            current = (current as? Map<*, *>)?.get(key) ?: return "null"
-        }
-        return current?.toString() ?: "null"
     }
 
     private fun initLimbo() {
@@ -110,23 +109,12 @@ class CustomNamesForGeyserMC @Inject constructor(
     fun onProxyInitialization(event: ProxyInitializeEvent) {
         logger.info("Starting")
 
-        val folder = File("plugins/CustomNamesForGeyserMC")
-        if (!folder.exists()) folder.mkdir()
-        val file = File(folder, "config.yml")
-        if (!file.exists()) {
-            val inputStream = this::class.java.classLoader.getResourceAsStream("config.yml")
-            if (inputStream != null) {
-                file.outputStream().use { output ->
-                    inputStream.copyTo(output)
-                }
-                logger.info("Config file copied from JAR")
-            } else {
-                logger.warn("Config file not found in JAR!")
-            }
-        }
+        tryCreatePath(File(pth))
+        copyFileFromJar(conf, pth, this.javaClass.classLoader)
+        updateYmlFromJar(conf, "plugins/whitelist_ultra/" + conf, this::class.java.classLoader)
 
-        data = Yaml().load<Map<String, Any>>(file.inputStream())
-            ?: emptyMap()
+        data = loadYmlFile(pth+ conf)
+
         logger.info("OK Config")
 
         factory = server.pluginManager
@@ -136,7 +124,7 @@ class CustomNamesForGeyserMC @Inject constructor(
         initLimbo()
         logger.info("OK Limbo")
 
-        if(data.getByPath("useMetric") == "true") {
+        if(data["useMetric"] == "true") {
             val pluginId = 28818
             val metrics = metricsFactory.make(this, pluginId)
 
@@ -148,7 +136,7 @@ class CustomNamesForGeyserMC @Inject constructor(
             logger.info("ON Metrics")
         }
 
-        if(data.getByPath("checkUpdates") == "true") {
+        if(data["checkUpdates"] == "true") {
             val url = "https://raw.githubusercontent.com/Mirik9724/CustomNamesForGeyserMC/refs/heads/master/VERSION"
             val version: String = try {
                 URL(url).readText().trim()
@@ -157,19 +145,19 @@ class CustomNamesForGeyserMC @Inject constructor(
             }
 
             if(VERSION != version){
-                logger.info(data.getByPath("version.new"))
+                logger.info(data["version.new"])
             }
             else{
-                logger.info(data.getByPath("version.noFound"))
+                logger.info(data["version.noFound"])
             }
             if(version == "unknown"){
-                logger.warn(data.getByPath("version.er"))
+                logger.warn(data["version.er"])
             }
             logger.info("Version: " + version)
         }
 
 
-        logger.info(data.getByPath("form.example"))
+        logger.info(data["form.example"])
         logger.info("ON")
 
     }
@@ -191,8 +179,8 @@ class CustomNamesForGeyserMC @Inject constructor(
             lateinit var nickForm: CustomForm.Builder
 
             wrongNick = CustomForm.builder()
-                .title(data.getByPath("form.wrongTitle"))
-                .label(data.getByPath("form.wrongNick"))
+                .title(data["form.wrongTitle"]!!)
+                .label(data["form.wrongNick"]!!)
                 .validResultHandler {
                     GeyserApi.api().sendForm(player.uniqueId, nickForm)
                 }
@@ -203,8 +191,8 @@ class CustomNamesForGeyserMC @Inject constructor(
 
 
             nickForm = CustomForm.builder()
-                .title(data.getByPath("form.title"))
-                .input(data.getByPath("form.enterNick"), data.getByPath("form.example"))
+                .title(data["form.title"]!!)
+                .input(data["form.enterNick"]!!, data["form.example"]!!)
                 .validResultHandler { response ->
                     val newNick: String? = response.next() as? String
                     if (isValidNick(newNick) == false) {
@@ -212,7 +200,7 @@ class CustomNamesForGeyserMC @Inject constructor(
                     }
                     else {
                         linkingUUID[player.uniqueId] = newNick!!
-                        player.disconnect(Component.text(data.getByPath("reconnect")))
+                        player.disconnect(Component.text(data["reconnect"]!!))
                     }
                 }
                 .closedResultHandler(Runnable{

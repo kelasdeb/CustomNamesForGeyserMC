@@ -5,6 +5,7 @@
  - [GeyserMC](https://geysermc.org/download)
  - [LimboAPI](https://modrinth.com/plugin/limboapi)
  - [Velocity 3.4+](https://papermc.io/software/velocity/)
+ - [MAPI](https://github.com/Mirik9724/MirikAPI)
  - OffLine mode
 
 **NOT compatible:**

@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "net.Mirik9724"
-version = "1.1"
+version = "1.1.2"
 
 repositories {
     mavenCentral()
@@ -33,8 +33,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     compileOnly("org.geysermc.geyser:api:2.9.0-SNAPSHOT")
     compileOnly("net.elytrium.limboapi:api:1.1.26")
-    implementation("org.yaml:snakeyaml:2.0")
-    implementation("org.bstats:bstats-velocity:3.1.0")
+
+    compileOnly("com.github.Mirik9724:MirikAPI:v0.1.5.9")
 }
 
 tasks {
