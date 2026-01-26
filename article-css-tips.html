@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Tips CSS untuk Pemula - Rizky Cahya Bahri</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Rizky Cahya Bahri</h1>
+            <p>Blog Pribadi | Catatan Harian | Portfolio</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul class="menu">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="about.html">Tentang Saya</a></li>
+                <li><a href="articles.html">Artikel</a></li>
+                <li><a href="contact.html">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <article class="full-article">
+            <h2>5 Tips CSS untuk Pemula</h2>
+            <p class="post-meta">Diposting pada 5 Mei 2025 | Kategori: Pemrograman</p>
+            
+            <img src="css-tips.jpg" alt="Tips CSS" class="article-image">
+            
+            <p>Setelah beberapa bulan mempelajari CSS, saya ingin berbagi beberapa tips yang sangat membantu saya memahami dan menguasai CSS dengan lebih baik. Berikut adalah 5 tips CSS untuk pemula:</p>
+            
+            <h3>1. Pelajari Box Model dengan Baik</h3>
+            <p>Konsep box model adalah fondasi dari CSS. Setiap elemen di halaman web adalah sebuah "box" yang terdiri dari:</p>
+            <ul>
+                <li>Content (isi)</li>
+                <li>Padding (jarak antara content dan border)</li>
+                <li>Border (batas)</li>
+                <li>Margin (jarak antara border dan elemen lain)</li>
+            </ul>
+            <p>Gunakan developer tools browser untuk memeriksa box model dari elemen-elemen di halaman web.</p>
+            
+            <h3>2. Gunakan Flexbox dan Grid</h3>
+            <p>Dua sistem layout modern ini akan membuat hidup Anda jauh lebih mudah:</p>
+            <ul>
+                <li><strong>Flexbox</strong>: Ideal untuk layout satu dimensi (baris atau kolom)</li>
+                <li><strong>Grid</strong>: Lebih powerful untuk layout dua dimensi</li>
+            </ul>
+            <p>Saya merekomendasikan game interaktif <a href="https://flexboxfroggy.com/" target="_blank">Flexbox Froggy</a> dan <a href="https://cssgridgarden.com/" target="_blank">Grid Garden</a> untuk belajar dengan cara yang menyenangkan.</p>
+            
+            <h3>3. Manfaatkan CSS Variables</h3>
+            <p>CSS Variables (Custom Properties) memungkinkan Anda menyimpan nilai yang dapat digunakan kembali dalam stylesheet:</p>
+            <pre><code>:root {
+    --primary-color: #2980b9;
+    --spacing-unit: 8px;
+}
+
+.button {
+    background-color: var(--primary-color);
+    padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+}</code></pre>
+            <p>Ini membuat stylesheet lebih mudah dikelola dan konsisten.</p>
+            
+            <h3>4. Gunakan Unit yang Tepat</h3>
+            <p>Pemilihan unit yang tepat sangat penting:</p>
+            <ul>
+                <li><strong>rem</strong>: Relatif terhadap font-size root element (lebih predictable daripada em)</li>
+                <li><strong>vh/vw</strong>: Viewport height/width, berguna untuk elemen yang perlu mengisi layar</li>
+                <li><strong>%</strong>: Relatif terhadap parent element</li>
+                <li><strong>px</strong>: Gunakan hanya untuk border atau ketika Anda benar-benar perlu ukuran fixed</li>
+            </ul>
+            
+            <h3>5. Mulai dengan Mobile First</h3>
+            <p>Dengan pendekatan mobile-first:</p>
+            <ol>
+                <li>Mulailah dengan styling untuk perangkat mobile (viewport kecil)</li>
+                <li>Gunakan media queries untuk menambahkan styling tambahan untuk layar yang lebih besar</li>
+            </ol>
+            <p>Ini lebih mudah daripada mencoba menyesuaikan layout desktop untuk mobile.</p>
+            
+            <div class="article-footer">
+                <a href="articles.html" class="back-link">← Kembali ke Daftar Artikel</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Rizky Cahya Bahri. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html

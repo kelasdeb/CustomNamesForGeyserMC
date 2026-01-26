@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak - Rizky Cahya Bahri</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Rizky Cahya Bahri</h1>
+            <p>Blog Pribadi | Catatan Harian | Portfolio</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul class="menu">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="about.html">Tentang Saya</a></li>
+                <li><a href="articles.html">Artikel</a></li>
+                <li><a href="contact.html" class="active">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="contact">
+            <h2>Hubungi Saya</h2>
+            <p>Jika Anda memiliki pertanyaan atau ingin berkolaborasi, silakan isi form berikut atau hubungi saya melalui media sosial.</p>
+            
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="name">Nama:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Subjek:</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Pesan:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Kirim Pesan</button>
+            </form>
+            
+            <div class="contact-info">
+                <h3>Informasi Kontak</h3>
+                <p><strong>Email:</strong> abahrizky56@gmail.com
+                <p><strong>Telepon:</strong> +62 882-7410-8879</p>
+                <p><strong>Alamat:</strong> Jl. Pulau Morotai No.12 Sukarame,Bandar Lampung</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Rizky Cahya Bahri. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

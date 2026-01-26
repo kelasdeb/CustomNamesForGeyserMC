@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyek Terbaru Saya - Rizky Cahya Bahri</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Rizky Cahya Bahri</h1>
+            <p>Blog Pribadi | Catatan Harian | Portfolio</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul class="menu">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="about.html">Tentang Saya</a></li>
+                <li><a href="articles.html">Artikel</a></li>
+                <li><a href="contact.html">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <article class="full-article">
+            <h2>Proyek Terbaru Saya: Aplikasi Manajemen Tugas</h2>
+            <p class="post-meta">Diposting pada 21 Mei 2025 | Kategori: Proyek</p>
+            
+            <img src="task-app.jpg" alt="Aplikasi Manajemen Tugas" class="article-image">
+            
+            <p>Saya baru saja menyelesaikan proyek aplikasi manajemen tugas yang dibangun dengan React untuk frontend dan Node.js untuk backend. Aplikasi ini membantu pengguna mengorganisir tugas sehari-hari dengan fitur-fitur seperti:</p>
+            <ul>
+                <li>Membuat, mengedit, dan menghapus tugas</li>
+                <li>Menandai tugas sebagai selesai</li>
+                <li>Filter tugas berdasarkan status</li>
+                <li>Pengingat deadline</li>
+                <li>Autentikasi pengguna</li>
+            </ul>
+            
+            <h3>Teknologi yang Digunakan</h3>
+            <div class="tech-stack">
+                <h4>Frontend:</h4>
+                <ul>
+                    <li>React dengan TypeScript</li>
+                    <li>Redux untuk state management</li>
+                    <li>Material-UI untuk komponen UI</li>
+                    <li>Axios untuk HTTP requests</li>
+                </ul>
+                
+                <h4>Backend:</h4>
+                <ul>
+                    <li>Node.js dengan Express</li>
+                    <li>MongoDB untuk database</li>
+                    <li>JWT untuk autentikasi</li>
+                    <li>Mongoose untuk ODM</li>
+                </ul>
+            </div>
+            
+            <h3>Tantangan dan Solusi</h3>
+            <p>Selama pengembangan, saya menghadapi beberapa tantangan menarik:</p>
+            
+            <h4>1. Synchronisasi State</h4>
+            <p>Masalah: Ketika pengguna menambahkan tugas baru di satu perangkat, perubahan tidak muncul di perangkat lain secara real-time.</p>
+            <p>Solusi: Saya mengimplementasikan WebSocket untuk update real-time dan menambahkan polling sebagai fallback.</p>
+            
+            <h4>2. Optimasi Performa</h4>
+            <p>Masalah: Aplikasi menjadi lambat ketika daftar tugas bertambah banyak.</p>
+            <p>Solusi: Saya menerapkan virtual scrolling dan pagination untuk mengurangi beban rendering.</p>
+            
+            <h3>Fitur yang Akan Datang</h3>
+            <p>Saya berencana untuk menambahkan beberapa fitur baru:</p>
+            <ul>
+                <li>Kolaborasi tim (multi-user)</li>
+                <li>Integrasi kalender</li>
+                <li>Laporan produktivitas</li>
+                <li>Versi mobile app</li>
+            </ul>
+            
+            <p>Proyek ini open-source dan tersedia di <a href="https://github.com/rizkycb/task-manager" target="_blank">GitHub</a>. Saya sangat menerima kontribusi dan feedback!</p>
+            
+            <div class="article-footer">
+                <a href="articles.html" class="back-link">← Kembali ke Daftar Artikel</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Rizky Cahya Bahri. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
